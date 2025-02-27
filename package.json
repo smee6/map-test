@@ -1,0 +1,20 @@
+{
+  "name": "store-map-project",
+  "version": "1.0.0",
+  "description": "3D 매장 지도 에디터 (three.js 사용)",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "parcel index.html --open",
+    "server": "nodemon server.js",
+    "build": "parcel build index.html"
+  },
+  "dependencies": {
+    "three": "^0.152.0",
+    "dat.gui": "^0.7.9",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "parcel": "^2.0.0",
+    "nodemon": "^2.0.0"
+  }
+}
