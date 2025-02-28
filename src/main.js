@@ -766,12 +766,20 @@ function generateExportHTML(projectData) {
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0xf0f0f0);
 
-      // 조명 추가
-      const ambientLight = new THREE.AmbientLight(0x505050);
+      // Ambient Light: 밝은 흰색, 적당한 강도로 전체적인 조명 보강
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
       scene.add(ambientLight);
-      const dirLight = new THREE.DirectionalLight(0xf2f2f2, 0.8);
+
+      // Directional Light: 흰색, 강도를 약간 높여서 주 조명 역할 수행
+      const dirLight = new THREE.DirectionalLight(0xffffff, 1.0);
       dirLight.position.set(10, 30, 10);
       scene.add(dirLight);
+
+      // Hemisphere Light: 위쪽과 아래쪽 빛의 색상을 다르게 주어 자연스러운 효과 연출
+      const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 0.6);
+      hemiLight.position.set(0, 20, 0);
+      scene.add(hemiLight);
+
 
       camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
       camera.position.set(30, 30, 30);
@@ -801,7 +809,7 @@ function generateExportHTML(projectData) {
          if (data.type === "Shelf" || data.type === "Tile") {
            obj = new THREE.Mesh(
              new THREE.BoxGeometry(data.width, data.height, data.depth),
-             new THREE.MeshBasicMaterial({ color: "#" + data.color })
+             new THREE.MeshLambertMaterial({ color: "#" + data.color })
            );
          }
          if (obj) {
